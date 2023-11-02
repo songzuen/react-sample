@@ -1,0 +1,24 @@
+{
+  "name": "react-sample",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "songzuen",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/songzuen/react-sample.git"
+  },
+  "bugs": {
+    "url": "https://github.com/songzuen/react-sample/issues"
+  },
+  "homepage": "https://github.com/songzuen/react-sample#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0"
+  }
+}
