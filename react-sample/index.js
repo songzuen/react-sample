@@ -3,10 +3,9 @@ const app = express()                       // function 사용
 const port = 3000                           // port set
 
 //mongodb 연결
-// mongoose.connect('mongodb+srv://songzuen:<password>@cluster0.0ykbmso.mongodb.net/?retryWrites=true&w=majority', {})
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://songzuen:Thdwndms95@cluster0.0ykbmso.mongodb.net/?retryWrites=true&w=majority', {})
+mongoose.connect('mongodb+srv://songzuen:<password>@@cluster0.0ykbmso.mongodb.net/?retryWrites=true&w=majority', {})
 .then(() => console.log('MongoDb connected'))
 .catch(err => console.log(err));
 
