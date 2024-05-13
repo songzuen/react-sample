@@ -1,4 +1,5 @@
 import './App.css';
+import Board from './components/Board';
 
 // 함수형 컴포넌트
 function App() {
@@ -7,8 +8,10 @@ function App() {
 		// jsx는 js와 html 구조를 같이 사용
 		<div className="game">
 			<div className="game-board">
+				<Board />
 			</div>
 			<div className="game-info">
+				game-info
 			</div>
 		</div>
 	);
