@@ -8,29 +8,24 @@ export default class Square extends React.Component{
 	// state 생성
 	// 인스턴스화된 객체에서 다른 메서드를 호출 전 수행해야하는 사용자 지정 초기화 제공
 	// 클래스를 new를 붙여서 인스턴스 객체로 생성하여 넘겨받은 인수랑 함께 먼저 실행
-	// constructor(props){
-	// 	super(props);
-	// 	this.state = {
-	// 		value : null
-	// 	}
-	// }
+	constructor(props){
+		super(props);
+		this.state = {
+			value : null
+		}
+	}
 
 	render(){
 		return (
 			// <button className="square" onClick={() => console.log('click')}>
-			// 	{/* props 사용하기 */}
-			// 	{/* {this.props.value} */}
-
 			// state 변경하기
 			// 데이터가 변할 때 다시 렌더링해주기 위해서 react status를 사용해야함
-			// <button className="square" onClick={() => this.setState({value:'X'})}>
-			// 	{/* state 이용하기 */}
-			// 	{this.state.value}
-			// </button>
+			<button className="square" onClick={() => this.setState({value:'X'})}>
+				{/* props 사용하기 */}
+				{/* {this.props.value} */}
 
-			// 부모 컴포넌트로 부터 함수도 내려받는다
-			<button className="square" onClick={() => this.props.onClick()}>
-				{this.props.value}
+				{/* state 이용하기 */}
+				{this.state.value}
 			</button>
 		)
 	}
