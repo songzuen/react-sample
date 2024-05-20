@@ -19,8 +19,10 @@ function App() {
 	return (
 		<div style={{ padding : "1rem"}}>
 			<input value={value} onChange={e => setValue(e.target.value)} />
-			<A message={value} posts={posts} />
-			<B />
+			<div style={{ display : "flex"}}>
+				<A message={value} posts={posts} />
+				<B message={value} posts={posts} />
+			</div>
 		</div>
 	)
 }
