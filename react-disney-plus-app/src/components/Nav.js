@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 
 const Nav = () => {
-
-	const [show, setShow] = useState(false)
+	const [show, setShow] = useState(false);
 
 	useEffect(() => {
 		window.addEventListener('scroll', () => {
-			if(window.scrollY > 50){
+			if (window.scrollY > 50) {
 				setShow(true);
 			} else {
-				setShow(false)
+				setShow(false);
 			}
 		})
 		return () => {
@@ -33,7 +32,7 @@ const NavWrapper = styled.nav`
 	left : 0;
 	right : 0;
 	height : 70px;
-	background-color : ${props => props.shw ? "#090b13" : "transparent"};
+	background-color : ${(props) => (props.show ? "#090b13" : "transparent")};
 	display : flex;
 	justify-content : space-between;
 	aline-items : center;
