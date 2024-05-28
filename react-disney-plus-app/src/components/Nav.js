@@ -32,9 +32,8 @@ const Nav = () => {
 	}
 
 	const handleChange = (e) => {
-		console.log(e.target.value)
-		setSearchValue(e.target.value)
-		navigate(`/search?q=${searchValue}`)
+		setSearchValue(e.target.value);
+		navigate(`/search?q=${e.target.value}`);
 	}
 
 	return (
@@ -76,18 +75,18 @@ const Input = styled.input`
 `;
 
 const NavWrapper = styled.nav`
-	position : fixed;
-	top : 0;
-	left : 0;
-	right : 0;
-	height : 70px;
-	background-color : ${(props) => (props.show ? "#090b13" : "transparent")};
-	display : flex;
-	justify-content : space-between;
-	aline-items : center;
-	padding : 0 36px;
-	letter-spacing : 16px;
-	z-index : 3;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 70px;
+	background-color: ${(props) => (props.show ? "#090b13" : "transparent")};
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 36px;
+	letter-spacing: 16px;
+	z-index: 3;
 `;
 
 const Logo = styled.a`
