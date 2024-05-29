@@ -1,19 +1,37 @@
+import { getAuth, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
 const Nav = () => {
-	const [show, setShow] = useState(false);
+	const [show, setShow] = useState("false");
 	const { pathname } = useLocation();
 	const [searchValue, setSearchValue] = useState("");
 	const navigate = useNavigate();
+
+	const auth = getAuth();
+	const provider = new GoogleAuthProvider();
 	
+	const initialUserData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : {};
+	const [userData, setUserData] = useState(initialUserData);
+
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				if(pathname === "/") navigate("/main");
+			} else {
+				navigate("/");
+			}
+		});
+	  }, [auth, navigate, pathname]);
+
 	useEffect(() => {
 		window.addEventListener('scroll', () => {
 			if (window.scrollY > 50) {
-				setShow(true);
+				setShow("true");
 			} else {
-				setShow(false);
+				setShow("false");
 			}
 		})
 		return () => {
@@ -24,9 +42,9 @@ const Nav = () => {
 	const handleScroll = () => {
 		window.addEventListener('scroll', () => {
 			if (window.scrollY > 50) {
-				setShow(true);
+				setShow("true");
 			} else {
-				setShow(false);
+				setShow("false");
 			}
 		})
 	}
@@ -36,13 +54,39 @@ const Nav = () => {
 		navigate(`/search?q=${e.target.value}`);
 	}
 
+	const handleAuth = () => {
+		signInWithPopup(auth, provider)
+		.then((result) => {
+			// // This gives you a Google Access Token. You can use it to access the Google API.
+			// const credential = GoogleAuthProvider.credentialFromResult(result);
+			// const token = credential.accessToken;
+			// // The signed-in user info.
+			// const user = result.user;
+			// // IdP data available using getAdditionalUserInfo(result)
+			// // ...
+			setUserData(result.user);
+			localStorage.setItem("userData", JSON.stringify(result.user));
+			
+		}).catch((error) => {
+			// // Handle Errors here.
+			// const errorCode = error.code;
+			// const errorMessage = error.message;
+			// // The email of the user's account used.
+			// const email = error.customData.email;
+			// // The AuthCredential type that was used.
+			// const credential = GoogleAuthProvider.credentialFromError(error);
+			// // ...
+        	console.log(error);
+		});
+	}
+
 	return (
 		<NavWrapper show={show}>
 			<Logo>
 				<img alt="Disney Plus logo" src="/images/logo.svg" onClick={() => (window.location.href = "/")} />
 			</Logo>
 
-			{ pathname === '/' ? (<Login>Login</Login>) : <Input className='nav__input' type='text' value={searchValue} onChange={handleChange} placeholder='검색해주세요.'/> }
+			{ pathname === '/' ? (<Login onClick={handleAuth}>Login</Login>) : <Input className='nav__input' type='text' value={searchValue} onChange={handleChange} placeholder='검색해주세요.'/> }
 		</NavWrapper>
 	)
 }
