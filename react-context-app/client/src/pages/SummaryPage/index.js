@@ -34,6 +34,10 @@ const SummaryPage = ({ setStep }) => {
 	<div>
 		<h1>주문 확인</h1>
 		<h2>여행 상품 : {orderDetails.products}</h2>
+		<ul>
+			{productList}
+		</ul>
+		{optionsDisplay}
 		<form onSubmit={handleSubmit}>
 			<input type='checkbox' id='confirm-checkbox' checked={checked} onChange={(e) => setChecked(e.target.checked)} />{" "}<label htmlFor='confirm-checkbox'>주문하려는 것을 확인하셨나요?</label>
 			<br/>

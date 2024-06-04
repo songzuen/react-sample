@@ -3,7 +3,7 @@ import { OrderContext } from '../../context/OrderContext'
 import axios from 'axios'
 
 const CompletePage = ({setStep}) => {
-	const [orderHistory, setOrderHistory] = useState({})
+	const [orderHistory, setOrderHistory] = useState([])
   	const [orderData] = useContext(OrderContext)
 	const [loading, setLoading] = useState(true)
 
@@ -13,7 +13,7 @@ const CompletePage = ({setStep}) => {
 
 	const orderCompleted = async(orderData) => {
 		try {
-			const response = await axios.post('http://localhost:4000/order', orderData)	
+			const response = await axios.post('http://localhost:4000/order', orderData)
 			setOrderHistory(response.data)
 			setLoading(false)
 		} catch (error) {
