@@ -4,9 +4,9 @@ import todos from "./todos";
 import posts from "./posts";
 
 const rootReducer = combineReducers({
-    counter,
-    todos,
-    posts
+	counter,
+	todos,
+	posts
 })
 
 export default rootReducer;

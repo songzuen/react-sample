@@ -9,11 +9,11 @@ import rootReducer from './reducers';
 import { applyMiddleware, createStore } from 'redux';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+	document.getElementById('root') as HTMLElement
 );
 
 const loggerMiddleware = (store : any) => (next : any) => (action : any) => {
-  next(action);
+	next(action);
 }
 
 const middleware = applyMiddleware(thunk, loggerMiddleware)
@@ -25,11 +25,11 @@ const store = createStore(rootReducer, undefined, middleware)
 // })
 
 const render = () => root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App onIncrement={()=> store.dispatch({type : "INCREMENT"})} onDecrement={()=> store.dispatch({type : "DECREMENT"})} />
-    </Provider>
-  </React.StrictMode>
+	<React.StrictMode>
+		<Provider store={store}>
+			<App onIncrement={()=> store.dispatch({type : "INCREMENT"})} onDecrement={()=> store.dispatch({type : "DECREMENT"})} />
+		</Provider>
+	</React.StrictMode>
 );
 
 render();
