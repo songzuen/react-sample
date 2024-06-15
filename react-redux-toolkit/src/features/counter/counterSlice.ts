@@ -30,8 +30,12 @@ export const incrementAsync = createAsyncThunk(
 export const fetchUsersAsync = createAsyncThunk(
 	'counter/fetchUsers',
 	//AbortController.signal
+	// promise return
+	// 매개변수가 없는 경우 _ 사용
 	async(_, {signal}) => {
+		// AbortController interface를 사용하여 request 요청도 취소
 		const controller = new AbortController();
+		// abort라는 이벤트가 발생한 경우 요청이 간 것도 중단 처리
 		signal.addEventListener('abort', () => {
 			controller.abort();
 		})

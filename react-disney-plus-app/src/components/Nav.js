@@ -3,6 +3,8 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser, removeUser } from '../store/userSlice'
 
 const Nav = () => {
 	const [show, setShow] = useState("false");
@@ -14,8 +16,10 @@ const Nav = () => {
 	const provider = new GoogleAuthProvider();
 	
 	const initialUserData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : {};
-	const [userData, setUserData] = useState(initialUserData);
+	// const [userData, setUserData] = useState(initialUserData);
 
+	const userData = useSelector(state => state.user);
+	const dispatch = useDispatch()
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
@@ -55,8 +59,7 @@ const Nav = () => {
 	}
 
 	const handleAuth = () => {
-		signInWithPopup(auth, provider)
-		.then((result) => {
+		signInWithPopup(auth, provider).then((result) => {
 			// // This gives you a Google Access Token. You can use it to access the Google API.
 			// const credential = GoogleAuthProvider.credentialFromResult(result);
 			// const token = credential.accessToken;
@@ -64,8 +67,15 @@ const Nav = () => {
 			// const user = result.user;
 			// // IdP data available using getAdditionalUserInfo(result)
 			// // ...
-			setUserData(result.user);
-			localStorage.setItem("userData", JSON.stringify(result.user));
+
+			// setUserData(result.user);
+			// localStorage.setItem("userData", JSON.stringify(result.user));
+			dispatch(setUser({
+				id : result.user.uid,
+				email : result.user.email,
+				photoURL : result.user.photoURL,
+				displayName : result.user.displayName
+			}))
 			
 		}).catch((error) => {
 			// // Handle Errors here.
@@ -80,10 +90,10 @@ const Nav = () => {
 		});
 	}
 	const handleLogOut = () => {
-		signOut(auth)
-		.then(() => {
-			setUserData();
-			navigate('/')
+		signOut(auth).then(() => {
+			// setUserData();
+			// navigate('/')
+			dispatch(removeUser())
 		})
 		.catch((error) => {
 			alert(error.message);
