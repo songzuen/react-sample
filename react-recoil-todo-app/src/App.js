@@ -20,9 +20,9 @@ function App() {
 			<TodoListFilters />
 			<TodoItemCreator />
 			{/* {todoList.map((todoItem) => { */}
-			{filteredTodoList.map((todoItem) => {
+			{filteredTodoList.map((todoItem) => (
 				<TodoItem key={todoItem.id} item={todoItem} />
-			})}
+			))}
 		</div>
 	);
 }
