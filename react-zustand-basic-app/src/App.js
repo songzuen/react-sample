@@ -17,6 +17,8 @@ function App() {
 			<header className='App-header'>
 				<Counter />
 				<TodoList />
+				<p>{user.name}</p>
+				<p>{user.phone}</p>
 			</header>
 		</div>
 	);
