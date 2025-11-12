@@ -4,14 +4,14 @@ export const useDebounce = (value, delay) => {
 	const [debouncedValue, setDebouncedValue] = useState(value);
 
 	useEffect(() => {
-	const handler = setTimeout(() => {
-		setDebouncedValue(value);
-	}, delay);
+		const handler = setTimeout(() => {
+			setDebouncedValue(value);
+		}, delay);
 
-	//value값이 바뀌었을때 handler 를 없애준다.
-	return () => {
-		clearTimeout(handler);
-	};
+		//value값이 바뀌었을때 handler 를 없애준다.
+		return () => {
+			clearTimeout(handler);
+		};
 	}, [value, delay]);
 
 	return debouncedValue;
